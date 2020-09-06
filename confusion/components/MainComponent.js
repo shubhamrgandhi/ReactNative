@@ -11,6 +11,22 @@ import { createDrawerNavigator, DrawerItemList} from '@react-navigation/drawer';
 import { Icon } from 'react-native-elements';
 import { NavigationContainer } from '@react-navigation/native';
 
+import { connect } from 'react-redux';
+import { fetchDishes, fetchComments, fetchLeaders, fetchPromos } from '../redux/ActionCreators';
+
+
+const mapStateToProps = state => {
+    return{
+    }
+}
+
+const mapDispatchToProps = dispatch => ({
+    fetchDishes: () => dispatch(fetchDishes()),
+    fetchComments: () => dispatch(fetchComments()),
+    fetchLeaders: () => dispatch(fetchLeaders()),
+    fetchPromos: () => dispatch(fetchPromos())
+});
+
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
@@ -181,6 +197,13 @@ class MainNavigator extends Component {
 
 class Main extends Component {
 
+    componentDidMount() {
+        this.props.fetchDishes();
+        this.props.fetchComments();
+        this.props.fetchPromos();
+        this.props.fetchLeaders();
+    }
+
     render() {
         return(
             <NavigationContainer>
@@ -216,4 +239,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default Main;
+export default connect(mapStateToProps, mapDispatchToProps)(Main);

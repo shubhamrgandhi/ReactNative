@@ -19,4 +19,4 @@ export const dishes = (state = {
         default:
             return state;
     }
-}
+};
