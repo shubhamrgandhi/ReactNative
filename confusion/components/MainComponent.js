@@ -4,6 +4,7 @@ import Menu from './MenuComponent';
 import Contact from './ContactComponent';
 import About from './AboutComponent';
 import Dishdetail from './DIshdetailComponent';
+import Reservation from './ReservationComponent';
 
 import { ScrollView, Text, View, Platform, Image, StyleSheet, SafeAreaView } from 'react-native';
 import { createStackNavigator  } from '@react-navigation/stack';
@@ -107,6 +108,30 @@ class ContactNavigator extends Component{
     }
 }
 
+class ReservationNavigator extends Component{
+    render() {
+        return(
+            <Stack.Navigator
+            screenOptions= {{
+                headerStyle: {
+                    backgroundColor: '#512DA8'
+                },
+                headerTintColor: '#fff',
+                headerTitleStyle: {
+                    color: '#fff'
+                }
+            }} >
+                <Stack.Screen 
+                 name='Contact'
+                 component={Reservation}
+                 options= {({navigation})=> ({headerLeft: (()=><Icon name='menu' size={24}
+                    color='white' onPress={() => navigation.toggleDrawer()} />)}) }
+                   />
+            </Stack.Navigator>
+        );
+    }
+}
+
 class AboutNavigator extends Component{
     render() {
         return(
@@ -189,7 +214,15 @@ class MainNavigator extends Component {
                         drawerIcon: ({ tintColor }) => (
                             <Icon name='info-circle' type='font-awesome' size={24} color={tintColor} /> 
                         )
-                    }}  />         
+                    }}  />
+                <Drawer.Screen name='Reserve a Table' component={ReservationNavigator}
+                options={{
+                    title : 'Reserve a Table',
+                    drawerLabel : 'Reserve a Table',
+                    drawerIcon: ({ tintColor }) => (
+                        <Icon name='cutlery' type='font-awesome' size={24} color={tintColor} /> 
+                    )
+                }}  />             
             </Drawer.Navigator>
         );
     }
